@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Education Hub</title>
+  <style>
+    /* Importing a clean modern font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+    /* Root variables to manage colors consistently */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #0093E9, #80D0C7); /* Blue to teal gradient */
+      --nav-bg: #0277BD; /* Strong blue for nav background */
+      --nav-hover-bg: #FFA726; /* Vibrant orange for hover effects */
+      --section-bg-1: #E3F2FD; /* Light blue */
+      --section-bg-2: #E0F7FA; /* Pale teal */
+      --section-bg-3: #FFF3E0; /* Warm light orange */
+      --section-bg-4: #FFF8E1; /* Very light yellow */
+      --footer-bg: #004D40; /* Deep teal for footer */
+      --text-color: #263238; /* Dark slate gray text */
+      --accent-color: #FFA726; /* Accent in warm orange */
+    }
+
+    /* Reset margin and padding universally */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Body base styling */
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #fff;
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header styles with animated gradient background */
+    header {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 3em 2em 4em;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      /* Animate background gradient position */
+      animation: gradientShift 15s ease infinite;
+    }
+
+    /* Main header title style */
+    header h1 {
+      font-size: 3em;
+      font-weight: 700;
+      margin-bottom: 0.3em;
+      letter-spacing: 2px;
+      /* subtle shadow for text clarity */
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+      /* initial state for fade-slide animation */
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlideIn 1s forwards 0.3s;
+    }
+
+    /* Header subtitle text style */
+    header p {
+      font-size: 1.25em;
+      font-weight: 400;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeSlideIn 1s forwards 0.6s;
+    }
+
+    /* Navigation bar styles */
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: var(--nav-bg);
+      box-shadow: 0 4px 8px rgba(2, 119, 189, 0.5); /* shadow matching nav color */
+      position: sticky; /* sticky nav on scroll */
+      top: 0;
+      z-index: 10;
+    }
+
+    /* Navigation links base style */
+    nav a {
+      display: inline-block;
+      color: white;
+      padding: 18px 28px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    /* Animated underline effect for nav links */
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      width: 0;
+      height: 3px;
+      background-color: var(--accent-color);
+      border-radius: 2px;
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+
+    /* Hover and focus styling for nav links */
+    nav a:hover,
+    nav a:focus {
+      color: var(--nav-hover-bg);
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 50%;
+      left: 25%;
+    }
+
+    /* Container for main content with max width and centered margin */
+    .container {
+      max-width: 1100px;
+      margin: 3em auto 6em auto;
+      padding: 0 1.5em;
+      flex-grow: 1; /* make container flexible to fill vertical space */
+    }
+
+    /* Individual sections styling with slight shadow and radius */
+    .section {
+      background: var(--section-bg-1);
+      padding: 2.5em 2em;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      margin-bottom: 2.5em;
+      /* initial state for fade-slide in animation */
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeSlideIn 0.8s forwards;
+    }
+
+    /* Unique background colors and staggered animation delays for each section */
+    #about {
+      background: var(--section-bg-1);
+      animation-delay: 0.1s;
+    }
+    #subjects {
+      background: var(--section-bg-2);
+      animation-delay: 0.3s;
+    }
+    #resources {
+      background: var(--section-bg-3);
+      animation-delay: 0.5s;
+    }
+    #contact {
+      background: var(--section-bg-4);
+      animation-delay: 0.7s;
+    }
+
+    /* Heading styles for uniform look */
+    h2 {
+      font-size: 2em;
+      margin-bottom: 0.8em;
+      color: var(--nav-bg);
+      text-shadow: 0 1px 3px rgba(2, 119, 189, 0.4);
+    }
+
+    /* List styling with spacing and interactive hover */
+    ul {
+      list-style-type: disc;
+      margin-left: 1.3em;
+      color: var(--text-color);
+      font-weight: 500;
+      font-size: 1.1em;
+    }
+
+    ul li {
+      padding: 6px 0;
+      transition: color 0.3s ease;
+    }
+
+    ul li:hover {
+      color: var(--accent-color);
+      cursor: default;
+    }
+
+    /* Contact links styling with accent color on hover */
+    #contact a {
+      color: var(--nav-bg);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    #contact a:hover,
+    #contact a:focus {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    /* Footer styling with pulse animation for lively effect */
+    footer {
+      background-color: var(--footer-bg);
+      color: #C8E6C9; /* Light greenish for good contrast */
+      text-align: center;
+      padding: 1.8em 1em;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      box-shadow: inset 0 4px 10px rgba(255, 169, 37, 0.3);
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      animation: footerPulse 4s ease-in-out infinite;
+      user-select: none;
+    }
+
+    /* Animation for background gradient movement */
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Fade in and slide up animation */
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer background pulse animation */
+    @keyframes footerPulse {
+      0%, 100% {
+        background-color: var(--footer-bg);
+        box-shadow: inset 0 4px 10px rgba(255, 169, 37, 0.3);
+      }
+      50% {
+        background-color: #00695C; /* Slightly lighter teal */
+        box-shadow: inset 0 6px 15px rgba(222, 165, 201, 0.5);
+      }
+    }
+
+    /* Responsive styling adjustments for smaller screens */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.25em;
+      }
+      header p {
+        font-size: 1em;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav a {
+        padding: 12px 0;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      nav a:first-child {
+        border-top: none;
+      }
+
+      .container {
+        margin: 2em 1em 5em;
+        padding: 0 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Site Header with title and tagline -->
+  <header>
+    <h1>Education Hub</h1>
+    <p>Your gateway to knowledge and learning</p>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#about" tabindex="0">About Us</a>
+    <a href="#subjects" tabindex="0">Subjects</a>
+    <a href="#resources" tabindex="0">Resources</a>
+    <a href="#contact" tabindex="0">Contact Us</a>
+  </nav>
+
+  <!-- Main content container -->
+  <div class="container">
+    <!-- About Us Section -->
+    <section id="about" class="section">
+      <h2>About Us</h2>
+      <p>
+        Welcome to Education Hub! We are dedicated to providing quality educational resources and information to help you achieve your learning goals. Our mission is to support learners of all ages with the tools and knowledge they need to succeed.
+      </p>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects" class="section">
+      <h2>Subjects</h2>
+      <p>Explore a variety of subjects including:</p>
+      <ul>
+        <li>Mathematics</li>
+        <li>Science</li>
+        <li>History</li>
+        <li>Literature</li>
+        <li>Computer Science</li>
+      </ul>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section">
+      <h2>Resources</h2>
+      <p>We offer a range of resources to assist you in your educational journey, including:</p>
+      <ul>
+        <li>Online Courses</li>
+        <li>Study Guides</li>
+        <li>Practice Tests</li>
+        <li>Educational Articles</li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <h2>Contact Us</h2>
+      <p>If you have any questions or need further assistance, feel free to reach out to us:</p>
+      <p>Email: <a href="hinay1738@gmail.com">hinay1738@gmail.com</a></p>
+    </section>
+  </div>
+
+  <!-- Footer with copyright -->
+  <footer>
+    <p>Thank you for learning with Education Hub — where curiosity meets clarity.</p>
+  </footer>
+</body>
+</html>
+
